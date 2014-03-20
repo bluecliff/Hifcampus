@@ -6,3 +6,9 @@ MONGODB_SETTINGS ={
         "host":"localhost",
         "port":10001,
         }
+
+SECRET_KEY="lijsf"
+
+JSONIFY_PRETTYPRINT_REGULAR=True
+
+DEFAULT_ID=1000
