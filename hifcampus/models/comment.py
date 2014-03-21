@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from hifcampus import db
-from hifcampus.models import Hifuser
+from hifcampus.extensions import db
+from user import Hifuser
 import datetime
 
-class Hifcomments(db.Document):
+class Hifcomment(db.Document):
     """Comment model"""
     id = db.IntField(primary_key=True)
     author = db.ReferenceField(Hifuser)

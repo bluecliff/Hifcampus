@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from hifcampus import db
+from hifcampus.extensions import db
 from hifcampus.models import Hifuser,Hifcomment
 import datetime
 import json

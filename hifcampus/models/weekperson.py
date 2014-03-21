@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from hifcampus import db
-from hifcampus.models import Hifuser,Hifcomment
+from hifcampus.extensions import db
+
+from user import Hifuser
+from comment import Hifcomment
 import datetime
 import json
 from mongoengine.queryset import queryset_manager
