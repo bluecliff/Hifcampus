@@ -13,7 +13,7 @@ class Hifuser(db.Document,UserMixin):
     password = db.StringField(default="",verbose_name=u"密码")
     avatar = db.IntField(default=0,verbose_name=u"是否有头像")
     email = db.EmailField(unique=True,default="",verbose_name=u"邮箱")
-    create_time = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"创建时间")
+    created_time = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"创建时间")
     last_login = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"上次登录")
     #permission = db.StringField(default="user",verbose_name=u"权限")
     role = db.IntField(default=USER.USER,verbose_name=u"ROLE")

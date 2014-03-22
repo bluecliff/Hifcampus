@@ -6,6 +6,7 @@ from flask import request,Flask,render_template
 from .config import DefaultConfig
 from models import Hifuser
 from user import user
+from admin import admin
 #from .settings import settings
 from .extensions import db,login_manager,init_principal
 from .utils import INSTANCE_FOLDER_PATH
@@ -14,6 +15,7 @@ __all__= ['create_app']
 
 DEFAULT_BLUEPRINTS=(
         user,
+        admin,
         )
 
 def create_app(config=None,app_name=None,blueprints=None):
@@ -28,7 +30,7 @@ def create_app(config=None,app_name=None,blueprints=None):
     configuer_hook(app)
     configure_blueprints(app,blueprints)
     configure_extensions(app)
-
+    configuer_template(app)
     return app
 
 def configuer_app(app,config=None):
@@ -56,3 +58,7 @@ def configure_extensions(app):
     init_principal(app)
 #    principal.init_app(app)
 
+def configuer_template(app):
+    @app.template_filter()
+    def format_date(value,format='%Y-%m-%d'):
+        return value.strftime(format)

@@ -20,7 +20,7 @@ def init_principal(app):
             for role in current_user.roles:
                 identity.provides.add(RoleNeed(role.name))
 
-from hifcampus.extensions import ROLE
+from constants import ROLE
 permissions={}
-for (key,value) in ROLE.iters():
+for (key,value) in ROLE.iteritems():
     permissions[key]=Permission(RoleNeed(value))
