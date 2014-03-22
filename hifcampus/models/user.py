@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from ..extensions import db
+from hifcampus.extensions import db
 from flask.ext.login import UserMixin
 import datetime
 from werkzeug import check_password_hash,generate_password_hash
-from .. import constants as USER
+from hifcampus import constants as USER
 class Hifuser(db.Document,UserMixin):
     """User model"""
     id = db.IntField(primary_key=True,verbose_name=u"ID")

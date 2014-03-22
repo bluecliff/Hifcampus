@@ -2,9 +2,10 @@
 # encoding: utf-8
 
 import os
-from flask import Blueprint,render_template,send_from_directory,abort,redirect,url_for,request,flash
+from flask import Blueprint,render_template,send_from_directory,abort,redirect,url_for,request,flash,session
 from flask import current_app as APP
 from flask.ext.login import login_required,current_user,login_user,logout_user,confirm_login,login_fresh
+from flask.ext.principal import identity_changed,Identity,AnonymousIdentity
 from hifcampus.extensions import db,login_manager
 from hifcampus.models import Hifuser,Id
 from forms import LoginForm,SignupForm
@@ -28,12 +29,21 @@ def login():
         if user and authenticated:
             remember = request.form.get('remember')=='y'
             if login_user(user,remember=remember):
+                identity_changed.send(APP._get_current_object(),identity=Identity(user.id))
                 flash("Logged in",'success')
             return redirect(form.next.data or url_for('user.index'))
         else:
             flash("Invalid Login",'error')
     return render_template('user/login.html',form=form)
-
+@user.route('/logout',methods=['GET'])
+def logout():
+    if current_user.is_authenticated():
+        logout_user()
+        for key in ('identity.name','identity.auth_type'):
+            session.pop(key,None)
+        identity_changed.send(APP._get_current_object(),identity=AnonymousIdentity)
+        flash('logout success')
+    return redirect(url_for('user.index'))
 @user.route('/signup',methods=['GET','POST'])
 def signup():
     if current_user.is_authenticated():

@@ -19,10 +19,11 @@ class SignupForm(Form):
     next = HiddenField()
     email = EmailField(u"Email",[Required(),Email()])
     password=PasswordField(u"Password",[Required(),Length(PASSWORD_LEN_MIN,PASSWORD_LEN_MAX)])
+    password_second=PasswordField(u"Repeat Password",[Required(),EqualTo('password')])
     nickname = TextField(u"User name",[Required(),Length(USERNAME_LEN_MIN,USERNAME_LEN_MAX)])
     submit = SubmitField(u"Signup")
 
-    def validate_name(self,field):
+    def validate_nickname(self,field):
         if Hifuser.objects(nickname=field.data).first() is not None:
             raise ValidationError(u'this username has is taken')
     def validate_email(self,field):

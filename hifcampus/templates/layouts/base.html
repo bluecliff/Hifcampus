@@ -39,7 +39,8 @@
                     <div class="nav-collapse collapse pull-right">
                         <ul class="nav">
                             <li><a href="{{ url_for('user.index') }}">{{ current_user.name }}</a></li>
-                        </ul>
+                            <li><a href="{{ url_for('user.logout') }}">Log out</a></li>
+                       </ul>
                     </div>
                     {% else %}
                     <div class="nav-collapse collapse pull-right">

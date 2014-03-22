@@ -8,6 +8,7 @@ NEWS_ADMIN=2
 LECTURE_ADMIN=3
 JOB_ADMIN=4
 WEEKPERSON_ADMIN=5
+ACTIVITY_ADMIN=6
 
 ROLE={
     ADMIN:'admin',
@@ -16,6 +17,7 @@ ROLE={
     LECTURE_ADMIN:'lecture_admin',
     JOB_ADMIN:'job_admin',
     WEEKPERSON_ADMIN:'weekperson_admin',
+    ACTIVITY_ADMIN:'activity_admin',
 }
 
 #base id

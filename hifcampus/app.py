@@ -3,12 +3,11 @@
 
 import os
 from flask import request,Flask,render_template
-
 from .config import DefaultConfig
 from models import Hifuser
 from user import user
 #from .settings import settings
-from .extensions import db,login_manager
+from .extensions import db,login_manager,init_principal
 from .utils import INSTANCE_FOLDER_PATH
 
 __all__= ['create_app']
@@ -52,6 +51,8 @@ def configure_extensions(app):
     @login_manager.user_loader
     def load_user(id):
         return Hifuser.objects(id=id).first()
-    login_manager.setup_app(app)
+    login_manager.init_app(app)
 
+    init_principal(app)
+#    principal.init_app(app)
 
