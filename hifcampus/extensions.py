@@ -18,7 +18,7 @@ def init_principal(app):
             identity.provides.add(UserNeed(current_user.id))
         if hasattr(current_user,'roles'):
             for role in current_user.roles:
-                identity.provides.add(RoleNeed(role.name))
+                identity.provides.add(RoleNeed(role))
 
 from constants import ROLE
 permissions={}

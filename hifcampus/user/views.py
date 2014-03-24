@@ -9,6 +9,7 @@ from flask.ext.principal import identity_changed,Identity,AnonymousIdentity
 from hifcampus.extensions import db,login_manager
 from hifcampus.models import Hifuser,Id
 from forms import LoginForm,SignupForm
+from werkzeug import check_password_hash,generate_password_hash
 
 user = Blueprint('user',__name__)
 
@@ -41,7 +42,7 @@ def logout():
         logout_user()
         for key in ('identity.name','identity.auth_type'):
             session.pop(key,None)
-        identity_changed.send(APP._get_current_object(),identity=AnonymousIdentity)
+        identity_changed.send(APP._get_current_object(),identity=AnonymousIdentity())
         flash('logout success')
     return redirect(url_for('user.index'))
 @user.route('/signup',methods=['GET','POST'])
@@ -52,8 +53,7 @@ def signup():
     if form.validate_on_submit():
         user = Hifuser()
         form.populate_obj(user)
-#        db.session.add(user)
-#        db.session.commit()
+        user.password=generate_password_hash(user.password)
         user.id=Id.get_next_id('uid')
         user.save()
         if login_user(user):

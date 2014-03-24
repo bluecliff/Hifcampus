@@ -16,11 +16,11 @@ class Hifuser(db.Document,UserMixin):
     created_time = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"创建时间")
     last_login = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"上次登录")
     #permission = db.StringField(default="user",verbose_name=u"权限")
-    role = db.IntField(default=USER.USER,verbose_name=u"ROLE")
-
+    #role = db.IntField(default=USER.USER,verbose_name=u"ROLE")
+    roles = db.ListField(db.IntField(),default=[USER.USER],verbose_name=u"权限")
     @classmethod
-    def authenticate(cls,username,password):
-        user = cls.objects(nickname=username).first()
+    def authenticate(cls,email,password):
+        user = cls.objects(email=email).first()
         if user:
             authenticated = user.check_password(password)
         else:

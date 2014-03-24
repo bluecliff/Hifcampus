@@ -10,7 +10,7 @@ from admin import admin
 #from .settings import settings
 from .extensions import db,login_manager,init_principal
 from .utils import INSTANCE_FOLDER_PATH
-
+from .constants import ROLE
 __all__= ['create_app']
 
 DEFAULT_BLUEPRINTS=(
@@ -62,3 +62,9 @@ def configuer_template(app):
     @app.template_filter()
     def format_date(value,format='%Y-%m-%d'):
         return value.strftime(format)
+    @app.template_filter()
+    def format_role(value):
+        role=[]
+        for role_id in value:
+            role.append(ROLE[role_id])
+        return role
