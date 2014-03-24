@@ -15,7 +15,7 @@
         {% for user in users %}
         <tr>
             <td>{{ user.nickname }}</td>
-            <td>{{ user.role|format_role }}</td>
+            <td>{{ user.roles|format_role }}</td>
             <td>{{ user.created_time|format_date }}</td>
             <td><a href="{{ url_for('admin.user', user_id=user.id) }}">Edit</a></td>
             <td><a href="{{ url_for('admin.delete_user',user_id=user.id) }}">Delete</a></td>

@@ -10,13 +10,14 @@ admin = Blueprint('admin',__name__,url_prefix='/admin')
 admin_permission = Permission(RoleNeed('admin'))
 @admin.route('/users')
 @login_required
-#@admin_permission.require()
+@admin_permission.require(403)
 def users():
     users = Hifuser.objects.all()
     return render_template('admin/users.html',users=users)
 
 @admin.route('/user/<int:user_id>',methods=['GET','POST'])
 @login_required
+@admin_permission.require(403)
 def user(user_id):
     user = Hifuser.objects(id=user_id).first()
     if user is None:
@@ -32,6 +33,7 @@ def user(user_id):
 
 @admin.route('/delete/<int:user_id>')
 @login_required
+@admin_permission.require(403)
 def delete_user(user_id):
     user = Hifuser.objects(id=user_id).first()
     if user is None:

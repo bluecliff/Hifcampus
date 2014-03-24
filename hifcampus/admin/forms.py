@@ -18,6 +18,6 @@ class UserForm(Form):
 #            choices=[(str(val),label) for val,label in ROLE.items()])
     email = EmailField(u"Email",[Required(),Email()])
     nickname = TextField(u"User name",[Required(),Length(USERNAME_LEN_MIN,USERNAME_LEN_MAX)])
-    role = SelectMultipleField(u'Role',choices=[(val,label) for val,label in ROLE.items()],option_widget=widgets.CheckboxInput(),coerce=int,widget=widgets.ListWidget(prefix_label=False))
+    roles = SelectMultipleField(u'Role',choices=[(val,label) for val,label in ROLE.items()],option_widget=widgets.CheckboxInput(),coerce=int,widget=widgets.ListWidget(prefix_label=False))
     created_time = DateField(u'Created time')
     submit = SubmitField(u'Save')
