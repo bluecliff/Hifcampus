@@ -1,0 +1,26 @@
+{% extends "base_layout.html" %}
+{% block content %}
+<div class="container">
+    <h2>Users</h2>
+    <table class='table table-bordered table-hover'>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Created Time</th>
+                <th></th>
+            </tr>
+        </thead>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.nickname }}</td>
+            <td>{{ user.roles|format_role }}</td>
+            <td>{{ user.create_time|format_date }}</td>
+            <td><a href="{{ url_for('bp_user.user', user_id=user.id) }}">Edit</a></td>
+            <td><a href="{{ url_for('bp_user.delete_user',user_id=user.id) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

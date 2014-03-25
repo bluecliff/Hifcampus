@@ -1,0 +1,62 @@
+li{
+	list-style: none;
+}
+textarea{
+	width:960px;
+}
+td{
+	max-width: 500px;
+	max-height: 80px;
+	overflow: hidden;
+}
+body{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+}
+
+.navbar .navbar-inner{
+	-webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+#myTab{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+.wrapper{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+.tools{
+	text-align: right;
+	margin-bottom: 10px;
+}
+.action button,.action a{
+	margin-right: 5px;
+}
+.long{
+	width:600px;
+}
+/* login */
+.login{
+	width:260px;
+	text-align: center;
+	margin-left: 350px;
+}
+.login input[type="submit"]{
+	margin-top: 20px;
+}
+.login input[type="submit"]{
+	margin-top: 20px;
+}
+.login #email{
+	margin-top: 20px;
+}
+
+/*edit*/
+.textarea{
+	height:500px;
+}
+

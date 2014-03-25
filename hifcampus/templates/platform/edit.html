@@ -1,0 +1,31 @@
+{% extends "platform/base_edit_layout.html" %}
+{% import "_forms.html" as forms %}
+{% block wrapper %}
+<form action="{{ url_for("."+args['endpoint'],id=form.data.id) }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="name" value="{{args['name']}}"/>
+    {% if errors %}
+    <span>{{errors}}</span>
+    {% endif %}
+    {% if 'thumbnail' in args['fields'] %}
+    <div>
+        <label for="thumbnail">缩略图</label>
+        <img src="/mobile/thumbnail/mid/{{ form.data.thumbnail }}/" class="img-rounded thumbnail"/>
+        <input type="file" name="thumbnail" />
+    </div>
+    {% endif %}
+    {% if args['name'] == 'weekperson' %}
+    <div>
+        <label for="thumbnail">封面</label>
+        <img src="/mobile/thumbnail/mid/{{ form.data.thumbnail1 }}/" class="img-rounded thumbnail"/>
+        <input type="file" name="image1" />
+    </div>
+    <div>
+        <label for="thumbnail">头像</label>
+        <img src="/mobile/thumbnail/mid/{{ form.data.thumbnail2 }}/" class="img-rounded thumbnail"/>
+        <input type="file" name="image2" />
+    </div>
+    {% endif %}
+    {{ forms.form_fields(form,args['fields']) }}
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+{% endblock %}

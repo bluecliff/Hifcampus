@@ -10,4 +10,4 @@ from activity import Hifactivity
 from weekperson import Hifweekperson
 from lecture import Hiflecture
 from job import Hifjob
-
+from grapevine import Hifgrapevine

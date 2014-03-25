@@ -20,7 +20,34 @@ def init_principal(app):
             for role in current_user.roles:
                 identity.provides.add(RoleNeed(ROLE[role]))
 
-from constants import ROLE
-permissions={}
-for (key,value) in ROLE.iteritems():
-    permissions[key]=Permission(RoleNeed(value))
+
+permissions = {
+    'user': Permission(RoleNeed('admin'),RoleNeed('user')),
+    'news': Permission(RoleNeed('admin'),RoleNeed('news_admin')),
+    'activity': Permission(RoleNeed('admin'),RoleNeed('activity_admin')),
+    'lecture': Permission(RoleNeed('admin'),RoleNeed('lecture_admin')),
+    'job': Permission(RoleNeed('admin'),RoleNeed('job_admin')),
+    'grapevine': Permission(RoleNeed('admin'),RoleNeed('grapevine_admin')),
+    'express': Permission(RoleNeed('admin'),RoleNeed('express_admin')),
+    'weekperson': Permission(RoleNeed('admin'),RoleNeed('person_admin')),
+    'admin':Permission(RoleNeed('admin')),
+}
+
+#user role
+ADMIN = 0
+USER=1
+NEWS_ADMIN=2
+LECTURE_ADMIN=3
+JOB_ADMIN=4
+WEEKPERSON_ADMIN=5
+ACTIVITY_ADMIN=6
+
+ROLE={
+    ADMIN:'admin',
+    USER:'user',
+    NEWS_ADMIN:'news_admin',
+    LECTURE_ADMIN:'lecture_admin',
+    JOB_ADMIN:'job_admin',
+    WEEKPERSON_ADMIN:'weekperson_admin',
+    ACTIVITY_ADMIN:'activity_admin',
+}

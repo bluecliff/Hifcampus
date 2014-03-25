@@ -1,0 +1,20 @@
+{% extends "base_layout.html" %}
+{% block script %}
+<script charset="utf-8" src="/static/editor/kindeditor.js"></script>
+<script charset="utf-8" src="/static/editor/lang/zh_CN.js"></script>
+<script>
+    KindEditor.ready(function(K) {
+            window.editor = K.create('textarea',{
+urlType:"",
+filterMode:false,
+});
+            });
+</script>
+<script>
+    $("button[type=submit]").live("click",function(){
+            html = window.editor.html();
+            window.editor.sync();
+            $(this).submit();
+            });
+</script>
+{% endblock %}

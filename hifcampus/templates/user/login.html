@@ -1,10 +1,9 @@
-{% from "macros/_form.html" import render_form %}
+{% from "macro/_form.html" import render_form %}
+{% extends "base_layout.html" %}
+{% block content %}
 
-{% set page_title = "Sign in" %}
+<h2>Sign in <small> Don't have an account? <a href="{{ url_for('bp_user.signup') }}">Sign up</a>, please.</small></h2>
+{{ render_form(url_for('bp_user.login'), form)}}
 
-{% extends "layouts/base.html" %}
-
-{% block body %}
-<h2>Sign in <small> Don't have an account? <a href="{{ url_for('user.signup') }}">Sign up</a>, please.</small></h2>
-{{ render_form(url_for('user.login'), form)}}
 {% endblock %}
+

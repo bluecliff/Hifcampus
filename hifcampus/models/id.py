@@ -13,6 +13,7 @@ class Id(db.Document):
     personid = db.IntField(default=DEFAULT_ID)
     imageid = db.IntField(default=DEFAULT_ID)
     lectureid = db.IntField(default=DEFAULT_ID)
+    grapevineid=db.IntField(default=DEFAULT_ID)
     @classmethod
     def get_next_id(self,which):
         if len(Id.objects) > 0:

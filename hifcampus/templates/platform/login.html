@@ -1,0 +1,16 @@
+{% extends "base_layout.html" %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<div class="well login">
+    <form action="{{ url_for(".login") }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.email(placeholder=form.email.label.text,class='field') }}
+        {{ form.password(placeholder=form.password.label.text,class='field') }}
+        <input type="submit" class="btn btn-primary" value="登陆">
+        {% if error %}
+        <div class="alert alert-error">{{ error }} </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

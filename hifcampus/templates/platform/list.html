@@ -1,0 +1,118 @@
+{% extends "base_layout.html" %}
+{% block content %}
+{% if 'action_new' in args %}
+<div class="tools">
+    <a class="btn btn-success" href="{{url_for("bp_platform."+args['action_new']['endpoint'])}}">{{args['action_new']['name']}}</a>
+</div>
+{% endif %}
+<table class="table">
+    {% if objects.items %}
+    <thead>
+        <tr>
+            {% for field_name in args['fields'] %}
+            <th>{{ objects.items[0]._fields[field_name].verbose_name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in objects.items %}
+        <tr>
+            {% for field_name in args['fields'] %}
+            <td>
+                {% if field_name == 'campus_id' %}
+                {{config['CAMPUS'][item.campus_id]}}
+                {% elif field_name == 'author' %}
+                {{item.author.nickname}}
+                {% elif field_name == 'status' %}
+                {{args['status'][item.status]}}
+                {% else %}
+                {{item._data[field_name]}}
+                {% endif %}
+            </td>
+            {% endfor %}
+
+            <td class="action">
+                {% if 'edit' in args %}
+                <a class="btn btn-mini btn-primary"  href="{{ url_for("bp_platform."+args['edit'], id=item.id) }}">编辑</a>
+                {% endif %}
+                {% if allow('admin') and 'status' in args['fields'] %}
+                {% if item.status==1 %}
+                <button class="btn btn-mini btn-inverse ban"  value="{{ item.id }}">禁止</a>
+                {% else %}
+                <button class="btn btn-mini btn-inverse pass"  value="{{ item.id }}">通过</a>
+                {% endif %}
+                {% endif %}
+                <button class="btn btn-mini btn-danger del" value="{{item.id}}" type="button">删除</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <span>无记录</span>
+    {% endif %}
+</table>
+<div class="pagination pagination-small pagination-right">
+    <ul>
+        {%- for page in objects.iter_pages() %}
+        {% if page %}
+        {% if page != objects.page %}
+        <li><a href="{{url_for("bp_platform."+args['name']+"_list",page=page)}}">{{ page }}</a></li>
+        {% else %}
+        <li class="disabled"><a href="#">{{ page }}</a></li>
+        {% endif %}
+        {% else %}
+        <li class=ellipsis><a>…</a></li>
+        {% endif %}
+        {%- endfor %}
+    </ul>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $(".del").live('click',function(){
+            if(confirm("你真的要删除该条记录吗？")){
+            $.post("/platform/delete/{{args['name']}}/"+this.value, function (data, textStatus){
+                jo=eval("("+data+")");
+                if (jo['msg']!=0){
+                alert(jo['msg_detail']);
+                }else
+                location.href="{{url_for("."+args['endpoint'])}}";
+                });
+            }else{}
+            });
+
+$(".pass").live('click',function(){
+        if(confirm("放行?")){
+        var but = $(this);
+        $.post("/platform/changestatus/{{args['name']}}/"+this.value,function(data){
+            pass_handler(data,but);
+            });
+        }else{}
+        });
+function pass_handler(data,button){
+    button.text("禁止");
+    button.attr("class","btn btn-mini btn-inverse ban");
+    button.parent().prev().text("通过");
+}
+function ban_handler(data,textStatus,button){
+    button.text("通过");
+    button.attr("class","btn btn-mini btn-inverse pass");
+    button.parent().prev().text("审查中");
+}
+
+$(".ban").live('click',function(){
+        if(confirm("禁止这条信息？")){
+        button = $(this);
+        $.post("/platform/changestatus/{{args['name']}}/"+this.value, function (data, textStatus){
+            jo=eval("("+data+")");
+            if (jo['msg']!=0){
+            alert(jo['msg_detail']);
+            }
+            else{
+            ban_handler(data,textStatus,button);
+            }
+            });
+        }else{}
+        });
+
+</script>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% from "macro/_form.html" import render_form %}
+{% extends "base_layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit User</h2>
+    {{ render_form(url_for('bp_user.user',user_id=user.id),form) }}
+</div>
+{% endblock %}

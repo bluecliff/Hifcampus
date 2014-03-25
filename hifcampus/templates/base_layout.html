@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <title>嗨翻校园——管理平台</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.css') }}" media="all">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}" media="all">
+        {% endblock %}
+    </head>
+    <body>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="{{ url_for("bp_platform.index") }}">
+                        嗨翻校园<sup>&alpha;</sup>
+                    </a>
+                    {% block nav%}
+                    <ul class="nav">
+                        {% if allow('admin') %}
+                        <li class="user"><a href="{{ url_for("bp_user.users") }}">用户管理</a></li>
+                        {% endif %}
+                        {% if allow('news') %}
+                        <li class="news"><a href="{{ url_for("bp_platform.news_list") }}">校园资讯</a></li>
+                        {% endif %}
+                        {% if allow('activity') %}
+                        <li class="activity"><a href="{{ url_for("bp_platform.activity_list") }}">校园活动</a></li>
+                        {% endif %}
+                        {% if allow('lecture') %}
+                        <li class="lecture"><a href="{{ url_for("bp_platform.lecture_list") }}">学术讲座</a></li>
+                        {% endif %}
+                        {% if allow('job') %}
+                        <li class="job"><a href="{{ url_for("bp_platform.job_list") }}">招聘信息</a></li>
+                        {% endif %}
+                        {% if allow('grapevine') %}
+                        <li class="grapevine"><a href="{{ url_for("bp_platform.grapevine_list") }}">小道消息</a></li>
+                        {% endif %}
+
+                        {% if allow('weekperson') %}
+                        <li class="weekperson"><a href="{{ url_for("bp_platform.weekperson_list") }}">每周人物</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav pull-right">
+                        {% if current_user.is_authenticated() %}
+                        <li><a href="{{url_for("bp_user.logout")}}">注销</a></li>
+                        {% else %}
+                        <li><a href="{{url_for("bp_user.signup")}}"><strong>注册</strong></a></li>
+                        <li><a href="{{url_for("bp_user.login")}}">登录</a></li>
+                        {%endif%}
+                    </ul>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                请使用Chrome，Firfox，Safari浏览器或将360、搜狗、猎豹浏览器切换为极速模式.
+            </div>
+            {% block wrapper %}
+            <div class="tabbable tabs-left" id="myTab">
+                <ul class="nav nav-tabs">
+                    {% block tab %}
+                    {% endblock %}
+                </ul>
+                <div class="tab-content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+        {% block footer %}
+        {% endblock %}
+        <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static',filename='js/main.js') }}"></script>
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>

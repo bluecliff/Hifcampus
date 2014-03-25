@@ -2,20 +2,20 @@
 # encoding: utf-8
 
 import os
-from flask import request,Flask,render_template
+from flask import Flask
 from .config import DefaultConfig
 from models import Hifuser
-from user import user
-from admin import admin
-#from .settings import settings
-from .extensions import db,login_manager,init_principal
+from .extensions import db,login_manager,init_principal,permissions
 from .utils import INSTANCE_FOLDER_PATH
-from .constants import ROLE
+from .extensions import ROLE
+from platform import bp_platform
+from user import bp_user
+
 __all__= ['create_app']
 
 DEFAULT_BLUEPRINTS=(
-        user,
-        admin,
+        bp_platform,
+        bp_user,
         )
 
 def create_app(config=None,app_name=None,blueprints=None):
@@ -31,6 +31,7 @@ def create_app(config=None,app_name=None,blueprints=None):
     configure_blueprints(app,blueprints)
     configure_extensions(app)
     configuer_template(app)
+    configuer_context_processor(app)
     return app
 
 def configuer_app(app,config=None):
@@ -68,3 +69,10 @@ def configuer_template(app):
         for role_id in value:
             role.append(ROLE[role_id])
         return role
+
+def configuer_context_processor(app):
+    @app.context_processor
+    def permission_check():
+        def allow(permission):
+            return permissions[permission].can()
+        return dict(allow=allow)
