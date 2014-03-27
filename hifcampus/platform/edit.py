@@ -204,19 +204,15 @@ MODEL = {
 def save_img(field):
     f = request.files[field]
     if f:
-        import os
         path = app.config['THUMBNAIL_PATH']
-        try:
-            os.mkdir(path)
-        except:pass
         try:
             imageid = Id.get_next_id("imageid")
             name = "%s/%s.png" % (path,imageid)
             f.save(name)
             import Image
-            outfile = ["%s/%s_50x50.png" % (path,imageid),
-            "%s/%s_100x100.png" % (path,imageid),
-            "%s/%s_150x150.png" % (path,imageid)]
+            outfile = ["%s/%s_small.png" % (path,imageid),
+            "%s/%s_mid.png" % (path,imageid),
+            "%s/%s_normal.png" % (path,imageid)]
             size = [(50,50),(100,100),(150,150)]
             if field == 'image1':
                 size = [(150,150),(200,200),(250,250)]

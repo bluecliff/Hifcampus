@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from flask import Blueprint,render_template,request,redirect,url_for,current_app as app,g,abort,session
+from flask import Blueprint,render_template,request,redirect,url_for,current_app as app,g,abort,session,send_from_directory
 import json,traceback
 from hifcampus import config,utils
 from hifcampus.models import Hifuser,Hifnews,Hifactivity,Hifweekperson,Hiflecture,Hifjob,Hifgrapevine
@@ -20,6 +20,10 @@ bp_platform = Blueprint(
 def index():
     return render_template("platform/index.html")
 
+@bp_platform.route("/thumbnail/<id>/<type>",methods=["GET"])
+def get_thumbnail(id,type):
+    file_name=str(id)+'_'+str(type)+'.png'
+    return send_from_directory(app.config['THUMBNAIL_PATH'],file_name)
 
 Model={
         'news':Hifnews,

@@ -14,8 +14,9 @@ class BaseConfig(object):
     SECRET_KEY="lijsf"
 
     UPLOAD_FOLDER=os.path.join(PROJECT_ROOT,'uploads')
-    THUMBNAIL_PATH=UPLOAD_FOLDER
+    THUMBNAIL_PATH=os.path.join(UPLOAD_FOLDER,'thumbnail')
     makedir(UPLOAD_FOLDER)
+    makedir(THUMBNAIL_PATH)
 
 class DefaultConfig(BaseConfig):
     DEBUG=True
