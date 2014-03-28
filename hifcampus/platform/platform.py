@@ -4,16 +4,18 @@
 from flask import Blueprint,render_template,request,redirect,url_for,current_app as app,g,abort,session,send_from_directory
 import json,traceback
 from hifcampus import config,utils
-from hifcampus.models import Hifuser,Hifnews,Hifactivity,Hifweekperson,Hiflecture,Hifjob,Hifgrapevine
+from hifcampus.models import Hifuser,Hifnews,Hifactivity,Hifweekperson,Hiflecture,Hifjob,Hifgrapevine,Model
 from flask.ext.principal import IdentityContext,identity_changed,Identity,AnonymousIdentity,Permission,RoleNeed
 from flask.ext.login import current_user,login_required,logout_user,login_user
 from werkzeug import check_password_hash,generate_password_hash
-
 
 bp_platform = Blueprint(
     "bp_platform",
     __name__,
     url_prefix='/platform')
+
+
+
 
 @bp_platform.route("/", methods=["GET", "POST"])
 @login_required
@@ -25,15 +27,6 @@ def get_thumbnail(id,type):
     file_name=str(id)+'_'+str(type)+'.png'
     return send_from_directory(app.config['THUMBNAIL_PATH'],file_name)
 
-Model={
-        'news':Hifnews,
-        'activity':Hifactivity,
-        'job':Hifjob,
-        'lecture':Hiflecture,
-        'user':Hifuser,
-        'grapevane':Hifgrapevine,
-        'person':Hifweekperson,
-    }
 @bp_platform.route("/changestatus/<model>/<postid>",methods=["GET","POST"])
 @login_required
 def changestatus(model,postid):

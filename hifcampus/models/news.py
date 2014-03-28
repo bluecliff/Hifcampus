@@ -20,12 +20,13 @@ class Hifnews(db.Document):
     content = db.StringField(verbose_name=u"内容")
     comments = db.ListField(db.ReferenceField(Hifcomment))
     create_time = db.DateTimeField(default=datetime.datetime.utcnow(),verbose_name=u"创建时间")
+    tags=db.ListField(db.StringField(max_length=20))
     #0状态是待审核状态
     status = db.IntField(default=0,verbose_name=u"状态")
     isbanner = db.IntField(default=0)
     thumbnail = db.IntField(default=1)
     #信息类别
-    category = db.ReferenceField(HifnewsCate,verbose_name=u"新闻类别")
+    #category = db.ReferenceField(HifnewsCate,verbose_name=u"新闻类别")
 
     #自定义查询方法
     @queryset_manager

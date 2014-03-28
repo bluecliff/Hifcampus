@@ -5,39 +5,25 @@ from .platform import PlatformView
 from hifcampus.extensions import permissions
 from hifcampus.models import Hifuser,Hifactivity,Hifnews,Hiflecture,Hifjob,Hifweekperson,Id,Hifgrapevine
 from wtforms import widgets
-from flask import abort,request,url_for,redirect,current_app as app
+from flask import request,url_for,redirect,current_app as app
 from .platform import bp_platform,check_permission
 from flask.ext.mongoengine.wtf import model_form
 from flask.ext.login import current_user
-from hifcampus import utils
-from hifcampus.extensions import ROLE
 import traceback
 import datetime
 
 EDIT = {
-#    'user_edit':{
-        #'name': 'user',
-        #'endpoint':'user_edit',
-        #'model': Hifuser,
-        #'template_name':'platform/edit.html',
-        #'permission': permissions['admin'],
-        #'nextid':'uid',
-        #'fields':['id','email','password','nickname','create_time','last_login','roles','avatar'],
-        #'field_args':{
-                #'nickname': {'widget': widgets.TextInput()},
-                #'password': {'widget': widgets.TextInput()},
-                #'roles': {'choices': [(val,label) for val, label in ROLE.items()],'widget': widgets.CheckboxInput()},
-                #},
-    #},
-    'news_edit':{
+   'news_edit':{
         'name': 'news',
         'endpoint':'news_edit',
         'model': Hifnews,
         'template_name':'platform/edit.html',
         'nextid':'newsid',
         'permission': permissions['news'],
-        'fields':['id','title','author','thumbnail','create_time','status','isbanner','content'],
+        'fields':['id','title','author','thumbnail','create_time','status','tags','isbanner','content'],
         'field_args':{
+                #'tags':{'widget':widgets.ListWidget()},
+                'id':{'widget':widgets.HiddenInput()},
                 'title': {'widget': widgets.TextInput()},
                 },
     },
@@ -88,7 +74,7 @@ EDIT = {
         'template_name':'platform/edit.html',
         'nextid':'jobid',
         'permission': permissions['job'],
-        'fields':['id','title','author','thumbnail','create_time','content'],
+        'fields':['id','title','thumbnail','author','create_time','content'],
         'field_args':{
                 'title': {'widget': widgets.TextInput()},
         },
@@ -184,8 +170,8 @@ class EditView(PlatformView):
                             'errors': errors
                         }
                         return self.render_template(context)
+
             form.save()
-            print form
             return redirect(url_for(".%s_list" % name))
         context = {
             'form': form,

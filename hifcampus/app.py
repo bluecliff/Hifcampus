@@ -10,12 +10,14 @@ from .utils import INSTANCE_FOLDER_PATH
 from .extensions import ROLE
 from platform import bp_platform
 from user import bp_user
+from api import bp_api
 
 __all__= ['create_app']
 
 DEFAULT_BLUEPRINTS=(
         bp_platform,
         bp_user,
+        bp_api,
         )
 
 def create_app(config=None,app_name=None,blueprints=None):
