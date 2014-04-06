@@ -12,7 +12,7 @@ ERROR_MESSAGE={
         'ERROR_REQUEST':{'msg':3000,'detail':'invalid request'},
         'ERROR_NOMORE':{'msg':3001,'detail':'no more items'},
         'ERROR_NOITEM':{'msg':3002,'detail':'no this item'},
-        'ERROR_INSERT':{'msg':3003,'detaic':'failed to add item'},
+        'ERROR_INSERT':{'msg':3003,'detail':'failed to add item'},
         }
 SUCCCESS_MESSAGE={
         'INSERT_SUCCESS':{'msg':1,'detail':'add item successfully'},
@@ -47,7 +47,6 @@ def thumbnail(size,id):
 
 @bp_api.route("/comment/<model>/<int:id>/",methods=["POST",])
 def post_comment(model,id):
-    print '11'
     if not request.json:
         return jsonify(ERROR_MESSAGE['ERROR_POST'])
     if add_comment(model,id,request.json):
