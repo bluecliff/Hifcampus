@@ -7,3 +7,4 @@ curl -i http://0.0.0.0:8000/api/list/activity/
 #curl -i http://0.0.0.0:8000/api/list/grapevine/
 #curl -i http://0.0.0.0:8000/api/list/weekperson/
 #curl -i http://0.0.0.0:8000/api/detail/news/1014/
+curl -i http://0.0.0.0:8000/api/detail/news/1014/

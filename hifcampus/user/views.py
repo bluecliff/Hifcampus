@@ -11,14 +11,14 @@ from werkzeug import generate_password_hash
 bp_user= Blueprint('bp_user',__name__,template_folder='templates',url_prefix='/user')
 admin_permission = Permission(RoleNeed('admin'))
 
-@bp_user.route('/users')
+@bp_user.route('/users/')
 @login_required
 @admin_permission.require(403)
 def users():
     users = Hifuser.objects.all()
     return render_template('user/users.html',users=users)
 
-@bp_user.route('/user/<int:user_id>',methods=['GET','POST'])
+@bp_user.route('/user/<int:user_id>/',methods=['GET','POST'])
 @login_required
 @admin_permission.require(403)
 def user(user_id):
@@ -36,7 +36,7 @@ def user(user_id):
     print form
     return  render_template('user/user.html',user=user,form=form)
 
-@bp_user.route('/delete/<int:user_id>')
+@bp_user.route('/delete/<int:user_id>/')
 @login_required
 @admin_permission.require(403)
 def delete_user(user_id):
@@ -46,7 +46,7 @@ def delete_user(user_id):
     user.delete()
     return redirect(url_for('.users'))
 
-@bp_user.route('/login',methods=['GET','POST'])
+@bp_user.route('/login/',methods=['GET','POST'])
 def login():
     if current_user.is_authenticated():
         return redirect(url_for('bp_user.users'))
@@ -62,7 +62,7 @@ def login():
         else:
             flash("Invalid Login",'error')
     return render_template('user/login.html',form=form)
-@bp_user.route('/logout',methods=['GET'])
+@bp_user.route('/logout/',methods=['GET'])
 def logout():
     if current_user.is_authenticated():
         logout_user()
@@ -71,7 +71,7 @@ def logout():
         identity_changed.send(APP._get_current_object(),identity=AnonymousIdentity())
         flash('logout success')
     return redirect(url_for('bp_user.login'))
-@bp_user.route('/signup',methods=['GET','POST'])
+@bp_user.route('/signup/',methods=['GET','POST'])
 def signup():
     if current_user.is_authenticated():
         return redirect(url_for('bp_platform.index'))
