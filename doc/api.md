@@ -5,7 +5,7 @@
 - 所有API接口均返回标准json格式，以UTF-16编码
 - 所有时间域均是一个整数，GMT时间，utc标准时间，使用时需要在客户端转成本地时区时间
 - 请求错误时返回相应的错误编码。
-- 所有API的前缀是http:://hifcampus.henhentui.com:8080/api/
+- 所有API的前缀是http:://hifcampus.henhentui.com/api/
 
 ## 错误码格式
 
