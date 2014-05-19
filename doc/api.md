@@ -159,7 +159,7 @@ GET
 
 GET
 
-/thumbnail/<size>/<int:id>/
+/thumbnail/\<size\>/<int:id>/
 
 size选项为：small，mid，normal。分别对应小，中，大型的图像
 
