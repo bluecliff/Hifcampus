@@ -22,6 +22,7 @@ class Hifweekperson(db.Document):
     thumbnail1 = db.IntField(default=3)
     thumbnail2 = db.IntField(default=0)
     status = db.IntField(default=1,verbose_name=u"状态")
+    isbanner=db.IntField(default=0)
     time = db.IntField(default=1,min_value=1,verbose_name=u'第几期')
     #自定义查询方法
     @queryset_manager

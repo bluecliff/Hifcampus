@@ -21,9 +21,9 @@ class BaseConfig(object):
 class DefaultConfig(BaseConfig):
     DEBUG=True
     MONGODB_SETTINGS ={
-        "DB":"HifTest",
-        "host":"localhost",
-        "port":10001,
+        "DB":"hifcampus_new",
+       # "host":"localhost",
+       # "port":10001,
         }
 
 

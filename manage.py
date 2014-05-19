@@ -19,6 +19,7 @@ class AddUser(Command):
         user.email='admin@hifcampus.com'
         user.password=generate_password_hash('hifcampus')
         user.id=Id.get_next_id('uid')
+	user.roles=[0]
         user.save()
 # Turn on debugger by default and reloader
 manager.add_command("runserver", Server(
