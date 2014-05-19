@@ -151,7 +151,6 @@ GET
 ```
 /comment/<model>/<int:id>/
 ```
-## thumbnail接口
 
 POST
 ```
@@ -166,6 +165,9 @@ POST
 }
 ```
 
+
+
+## thumbnail接口
 返回对应id的图像
 
 ### 格式
