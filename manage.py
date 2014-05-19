@@ -19,7 +19,7 @@ class AddUser(Command):
         user.email='admin@hifcampus.com'
         user.password=generate_password_hash('hifcampus')
         user.id=Id.get_next_id('uid')
-	user.roles=[0]
+        user.roles=[0]
         user.save()
 # Turn on debugger by default and reloader
 manager.add_command("runserver", Server(
@@ -28,7 +28,7 @@ manager.add_command("runserver", Server(
     host='0.0.0.0',
     port=8000)
 )
-manager.add_command('adduser',AddUser)
+manager.add_command('adduser',AddUser())
 
 if __name__ == "__main__":
     print 'start manager'
