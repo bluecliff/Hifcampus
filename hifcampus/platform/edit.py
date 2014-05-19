@@ -184,7 +184,7 @@ MODEL = {
     'news':Hifnews,
     'activity':Hifactivity,
     'person':Hifweekperson,
-    'grapevane':Hifgrapevine,
+    'grapevine':Hifgrapevine,
     'lecture':Hiflecture,
 }
 def save_img(field):

@@ -17,7 +17,7 @@ class Hifgrapevine(db.Document):
     #0状态是待审核状态
     status = db.IntField(default=1,verbose_name=u"状态")
     isbanner = db.IntField(default=0)
-    thumbnail = db.IntField(default=2)
+    thumbnail = db.IntField(default=5)
     #增加信息类别
     #category = db.StringField(default=u"新闻",verbose_name=u"新闻类别")
     #自定义查询方法

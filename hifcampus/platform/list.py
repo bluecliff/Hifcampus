@@ -51,7 +51,7 @@ LIST = {
     },
     'grapevine':{
         'type':PageListView,
-        'name': 'grapevine_edit',
+        'name': 'grapevine',
         'endpoint':'grapevine_list',
         'model': Hifgrapevine,
         'template_name':'platform/list.html',
