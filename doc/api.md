@@ -138,9 +138,9 @@ detail接口返回具体某一个条目的具体内容
 ### 格式
 
 GET
-
+```
 /detail/<model>/<int:id>/
-
+```
 ## comment 接口
 
 comment接口返回对用消息的comment列表
@@ -148,20 +148,30 @@ comment接口返回对用消息的comment列表
 ### 格式
 
 GET
-
+```
 /comment/<model>/<int:id>/
-
+```
 ## thumbnail接口
+
+POST
+```
+/comment/<model>/<int:id>/
+```
+向model的id=id的项目中增加一条评论,提交数据必须是json格式,包括content和author_id两个项目。
+
+```
+{
+    "content":"Test comment",
+    "author_id":"1234",
+}
+```
 
 返回对应id的图像
 
 ### 格式
 
 GET
-
-/thumbnail/\<size\>/<int:id>/
-
+```
+/thumbnail/<size>/<int:id>/
+```
 size选项为：small，mid，normal。分别对应小，中，大型的图像
-
-
-
