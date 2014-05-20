@@ -21,7 +21,7 @@
                         <li class="user"><a href="{{ url_for("bp_user.users") }}">用户管理</a></li>
                         {% endif %}
                         {% if allow('news') %}
-                        <li class="news"><a href="{{ url_for("bp_platform.news_list") }}">校园资讯</a></li>
+                        <li class="news"><a href="{{ url_for("bp_platform.news_list") }}">校园新闻</a></li>
                         {% endif %}
                         {% if allow('activity') %}
                         <li class="activity"><a href="{{ url_for("bp_platform.activity_list") }}">校园活动</a></li>
