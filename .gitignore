@@ -1,6 +1,3 @@
+/hifcampus/uploads/
 *.pyc
-*.png
-*.jpg
-*.jpeg
 /.idea/
-!/hifcampus/static/
